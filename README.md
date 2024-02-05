@@ -4,25 +4,25 @@ James App Code Challenge
 This document will cover the steps to run the generated tests and export the results to a Report which can be opened on the browser.
 
 ### Pre-requisites
-- Java SDK
-- Android Studio
+- [Java SDK](https://www.java.com/es/download/help/java_mac.html)
+- [Android Studio](https://developer.android.com/studio?hl=es-419)
 - Android Emulator (this version was tested with Pixel 7 TiramisuPrivacySandbox - V14.0)
-- Homebrew
-- npm
+- [Homebrew](https://brew.sh/)
+- [npm](https://formulae.brew.sh/formula/node)
 
-### Allure Reporting
+### [Allure Reporting](https://allurereport.org/docs/gettingstarted-installation/)
 Run the following command to install Allure:
 ```
     brew install allure
 ```
 
-### Maven
+### [Maven](https://mvnrepository.com/)
 Run the following command to install mvn agent
 ```
     brew install maven
 ```
 
-### Appium
+### [Appium](https://appium.io/docs/en/2.0/quickstart/)
 
 #### Installation
 Run the following commands:
@@ -49,7 +49,8 @@ Run the following commands:
 ```
 
 ### Run Tests
-- Open the Android Emulator
+- Open the Android Emulator and start a virtual device
+- Make sure the Appium Server is running
 - Run the following command to identify the emulator UUID
     ```
         adb devices
