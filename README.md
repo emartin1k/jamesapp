@@ -56,7 +56,7 @@ Run the following commands:
         adb devices
     ```
     Once the uuid is located (for example "emulator-5554") use that value to replace the constant "EMULATOR_UUID" located in: **jamesapp/src/test/java/TestsAll/AbstractTest,java**
-- Open the app and login using a valid phone number and the corresponding OTP (This is due to the pending feature to get the necessary OTP received by SMS)
+- **Important:** Open the app and login using a valid phone number and the corresponding OTP (This is due to the pending feature to get the necessary OTP received by SMS)
 - Run the following commands at the root jamesapp folder:
     ```
         mvn test 
