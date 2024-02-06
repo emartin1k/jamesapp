@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+
 import java.net.URL;
 import java.time.Duration;
 
@@ -33,8 +34,8 @@ public class AbstractTest {
 
         try {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);  // Default local url for Appium Server
-        }catch (Exception e){
-            System.out.println("Error starting Application - Stacktrace: "+ e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error starting Application - Stacktrace: " + e.getMessage());
             screenshot(driver);
             Assert.fail("Error starting Application");
         }
@@ -48,7 +49,7 @@ public class AbstractTest {
             driver.quit();
         }
 
-        System.out.println("Tests Finished");
+        System.out.println("---------- Tests Finished ----------");
     }
 
     public static void waitElementById(AndroidDriver driver, int timeout, String elementId) {
@@ -56,7 +57,7 @@ public class AbstractTest {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id(elementId)));
         } catch (Exception e) {
-            System.out.println("Element by Id not found: " + elementId + " - Stacktrace: "+ e.getMessage());
+            System.out.println("Element by Id not found: " + elementId + " - Stacktrace: " + e.getMessage());
             screenshot(driver);
             Assert.fail("Element by Id: " + elementId + " not present.");
         }
@@ -65,9 +66,9 @@ public class AbstractTest {
     public static void waitElementByClassName(AndroidDriver driver, int timeout, String elementId) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.className(elementId)));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.className(elementId)));
         } catch (Exception e) {
-            System.out.println("Element by ClassName not found: " + elementId + " - Stacktrace: "+ e.getMessage());
+            System.out.println("Element by ClassName not found: " + elementId + " - Stacktrace: " + e.getMessage());
             screenshot(driver);
             Assert.fail("Element by ClassName: " + elementId + " not present.");
         }
@@ -78,7 +79,7 @@ public class AbstractTest {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath(elementId)));
         } catch (Exception e) {
-            System.out.println("Element by XPath not found: " + elementId + " - Stacktrace: "+ e.getMessage());
+            System.out.println("Element by XPath not found: " + elementId + " - Stacktrace: " + e.getMessage());
             screenshot(driver);
             Assert.fail("Element by XPath: " + elementId + " not present.");
         }

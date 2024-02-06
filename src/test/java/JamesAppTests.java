@@ -1,6 +1,5 @@
 import io.appium.java_client.AppiumBy;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
@@ -8,11 +7,15 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 public class JamesAppTests extends AbstractTest {
+    // Note: Test names starting with the prefix testXX_ are designed to easily establish the execution order.
+    // Current tests are designed to run in the established order and have the necessary navigation steps to do so, as an improvement this can be removed from the tests logic and can be added to an AfterTest section
+
     @Test(testName = "ChangeName", description = "Successful User Name Change")
-    public void test01_ChangeName() throws IOException {
+    public void test01_ChangeName() {
+        // To start running this tests, a previous login is required since this suite does not cover succesful login
+
         waitElementById(driver, 3, "com.hdw.james.rider:id/MAIN_MENU_ID");
         driver.findElements(AppiumBy.id("com.hdw.james.rider:id/MAIN_MENU_ID")).getFirst().click();
 
@@ -48,7 +51,9 @@ public class JamesAppTests extends AbstractTest {
     }
 
     @Test(testName = "ChangePassword", description = "Successful User Password Change and Restore")
-    public void test02_ChangePassword() throws IOException {
+    public void test02_ChangePassword() {
+        // Note: This test was designed to be able to be executed over and over since the test itself changes the pass to a new and back to the old value and does all the navigation in the middle
+
         waitElementById(driver, 3, "com.hdw.james.rider:id/MAIN_MENU_ID");
         driver.findElements(AppiumBy.id("com.hdw.james.rider:id/MAIN_MENU_ID")).getFirst().click();
 
@@ -100,7 +105,7 @@ public class JamesAppTests extends AbstractTest {
     }
 
     @Test(testName = "LogoutOk", description = "Successful Logout")
-    public void test03_LogoutOk() throws IOException {
+    public void test03_LogoutOk() {
         waitElementById(driver, 3, "com.hdw.james.rider:id/MAIN_MENU_ID");
         driver.findElements(AppiumBy.id("com.hdw.james.rider:id/MAIN_MENU_ID")).getFirst().click();
 
@@ -113,8 +118,11 @@ public class JamesAppTests extends AbstractTest {
         Assert.assertEquals(getStartedMessage, "Enter your phone number");
     }
 
-    @Test(testName = "LoginWrongOtp", description = "Login with wrong OTP") @Ignore
-    public void test04_LoginWrongOtp() throws IOException {
+    @Test(testName = "LoginWrongOtp", description = "Login with wrong OTP")
+    @Ignore
+    public void test04_LoginWrongOtp() {
+        // Note: This test was ignored since the message at the end depending on how many attempts or running the suite we do, it will show one or other message
+
         waitElementById(driver, 2, "com.hdw.james.rider:id/input");
 
         var phoneInput = driver.findElements(AppiumBy.id("com.hdw.james.rider:id/input")).getFirst();
@@ -142,8 +150,11 @@ public class JamesAppTests extends AbstractTest {
         driver.findElements(AppiumBy.accessibilityId("Navigate up")).getFirst().click();
     }
 
-    @Test(testName = "LoginOk", description = "Successful Login") @Ignore
-    public void test05_LoginOk() throws IOException {
+    @Test(testName = "LoginOk", description = "Successful Login")
+    @Ignore
+    public void test05_LoginOk() {
+        // Note: This test is ignored due to having issues with displaying the login page
+
         waitElementById(driver, 5, "com.hdw.james.rider:id/getStartedButton");
 
         driver.findElements(AppiumBy.id("com.hdw.james.rider:id/getStartedButton")).getFirst().click();
@@ -199,7 +210,7 @@ public class JamesAppTests extends AbstractTest {
         driver.findElements(AppiumBy.id("com.hdw.james.rider:id/continueButton")).getFirst().click();
 
         waitElementByClassName(driver, 2, "android.widget.EditText");
-        driver.findElements(AppiumBy.className("android.widget.EditText")).stream().forEach(codeInput -> codeInput.sendKeys("0"));
+        driver.findElements(AppiumBy.className("android.widget.EditText")).forEach(codeInput -> codeInput.sendKeys("0"));
 
         driver.findElements(AppiumBy.id("com.hdw.james.rider:id/continueButton")).getFirst().click();
 
